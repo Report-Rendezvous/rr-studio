@@ -1,5 +1,5 @@
 import { ReportGateway } from '@/lib/gateway/reportGateway'
-import { ReportUsecase } from '@/lib/usecase/reportUsecase'
+import { ReportQueryUsecase } from 'report-rendezvous-usecase'
 import { notFound } from 'next/navigation'
 
 type Report = {
@@ -8,20 +8,25 @@ type Report = {
   thumbnail: string
 }
 
-const getReportArticle = async (id: string): Promise<Report> => {
-  const reportArticle = await ReportUsecase({
+const getReportArticle = async (id: string): Promise<Report | null> => {
+  const result = await ReportQueryUsecase({
     reportPort: ReportGateway()
-  }).fetchReportById(id)
+  }).findReportById(id)
 
-  return {
-    id: reportArticle.id,
-    title: reportArticle.meta.title,
-    thumbnail: reportArticle.meta.thumbnail
+  if (result.data) {
+    const reportArticle = result.data
+    return {
+      id: reportArticle.id,
+      title: reportArticle.meta.title,
+      thumbnail: reportArticle.meta.thumbnail
+    }
   }
+
+  return null
 }
 
 const ReportArticlePage = async ({ params }: { params: { id: string } }) => {
-  const reportArticle: Report = await getReportArticle(params.id)
+  const reportArticle = await getReportArticle(params.id)
 
   if (!reportArticle) {
     notFound()

@@ -1,0 +1,12 @@
+{
+  "name": "report-rendezvous-domain",
+  "version": "1.0.0",
+  "description": "report-rendezvous's domain package",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc --build --clean",
+    "test": "vitest run"
+  },
+  "packageManager": "pnpm@8.0.0",
+  "private": true
+}

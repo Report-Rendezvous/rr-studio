@@ -18,3 +18,8 @@ export type SideNavItem = {
   href: string
   icon: string
 }
+export type FooterNaviItems = FooterNaviItem[]
+export type FooterNaviItem = {
+  title: string
+  href: string
+}

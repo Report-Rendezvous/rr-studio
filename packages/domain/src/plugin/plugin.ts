@@ -3,3 +3,5 @@ type RRPlugin = {
   description: string
   version: string
 }
+
+export class ReportRendezvousPlugin {}

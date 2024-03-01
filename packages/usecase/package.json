@@ -1,0 +1,15 @@
+{
+  "name": "report-rendezvous-usecase",
+  "version": "1.0.0",
+  "description": "report-rendezvous's usecase package",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc --build --declaration",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "report-rendezvous-domain": "*"
+  },
+  "packageManager": "pnpm@8.0.0",
+  "private": true
+}

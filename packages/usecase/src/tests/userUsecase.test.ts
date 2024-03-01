@@ -1,4 +1,4 @@
-import { UserUCOptions, UserProfileUsecase } from '@/lib/usecase/userUsecase'
+import { UserUCOptions, UserProfileUsecase } from '../user'
 
 describe('UserUsecase', () => {
   it.concurrent(
@@ -10,7 +10,7 @@ describe('UserUsecase', () => {
         name: 'USER_NAME'
       })
       const options: UserUCOptions = {
-        userPort: {
+        userRepository: {
           fetchUserProfileById: mockedPort
         }
       }
@@ -31,7 +31,7 @@ describe('UserUsecase', () => {
       const mockedPort = vi.fn()
       mockedPort.mockResolvedValue(null)
       const options: UserUCOptions = {
-        userPort: {
+        userRepository: {
           fetchUserProfileById: mockedPort
         }
       }

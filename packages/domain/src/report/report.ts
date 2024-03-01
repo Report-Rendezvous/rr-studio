@@ -1,8 +1,9 @@
-import { UserId } from '@/lib/domain/user'
+import { UserId } from '../user'
 
 export type AuthorId = UserId
 export type ReportId = string
 export type Reports = Report[]
+
 export type Report = {
   id: ReportId
   meta: ReportMeta
@@ -15,4 +16,9 @@ export type ReportMeta = {
 
 export type Author = {
   id: AuthorId
+}
+
+export interface ReportRepository {
+  findReportById(id: ReportId): Promise<Report | null>
+  findReports(): Promise<Reports>
 }

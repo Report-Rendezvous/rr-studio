@@ -1,13 +1,18 @@
-import { UserPort } from '@/lib/port/userPort'
+import { UserId, UserRepository } from 'report-rendezvous-domain'
 
-export const fetchUserProfileById = async (id: string) => {
+const fetchUserProfileById = async (id: string) => {
   const response = await fetch(`http://localhost:3000/api/users/${id}`)
   if (!response.ok) {
-    return Promise.resolve(null)
+    return null
   }
   return response.json()
 }
 
-export const UserGateway: UserPort = {
+const saveUserName = async (opt: {
+  id: UserId
+  name: string
+}): Promise<void> => {}
+
+export const UserGateway: UserRepository = {
   fetchUserProfileById
 }

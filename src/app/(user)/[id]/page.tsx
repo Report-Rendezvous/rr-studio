@@ -1,7 +1,7 @@
 import { UserGateway } from '@/lib/gateway/userGateway'
-import { UserProfileUsecase } from '@/lib/usecase/userUsecase'
+import { UserProfileUsecase } from 'report-rendezvous-usecase'
 import { notFound } from 'next/navigation'
-import { UserProfile } from '@/lib/domain/user'
+import { UserProfile } from 'report-rendezvous-domain'
 
 interface UserPageProps {
   params: {
@@ -9,9 +9,9 @@ interface UserPageProps {
   }
 }
 
-async function getUserProfile(id: string): Promise<UserProfile> {
+async function getUserProfile(id: string): Promise<UserProfile | null> {
   return await UserProfileUsecase({
-    userPort: UserGateway
+    userRepository: UserGateway
   }).fetchUserProfileById(id)
 }
 

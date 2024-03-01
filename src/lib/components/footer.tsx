@@ -1,5 +1,14 @@
 import { siteConfig } from '@/lib/config/siteConfig'
+import { FooterNaviItem } from '@/lib/types'
 import Link from 'next/link'
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+  PromiseLikeOfReactNode
+} from 'react'
+import { UrlObject } from 'url'
 
 export function Footer() {
   return (
@@ -35,7 +44,7 @@ export function Footer() {
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
               {siteConfig.footerNaviLegalItems.map((item, index) => (
-                <li className="mb-4" key={`item-${index}`}>
+                <li className="mb-4" key={index}>
                   <Link href={item.href} className="hover:underline">
                     {item.title}
                   </Link>

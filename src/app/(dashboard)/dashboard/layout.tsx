@@ -1,6 +1,5 @@
 import { DashboardNav } from '@/lib/components/dashboardNav'
 import { Footer } from '@/lib/components/footer'
-import { Header } from '@/lib/components/header'
 import { MainNavigation } from '@/lib/components/mainNavigation'
 import { UserAccountNav } from '@/lib/components/userAccountNav'
 import { siteConfig } from '@/lib/config/siteConfig'

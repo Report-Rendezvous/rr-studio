@@ -1,6 +1,7 @@
 import { ReportCard } from '@/lib/components/reportCard'
 import { ReportGateway } from '@/lib/gateway/reportGateway'
-import { ReportUsecase } from '@/lib/usecase/reportUsecase'
+import { Report as ReportDomain } from 'report-rendezvous-domain'
+import { ReportQueryUsecase } from 'report-rendezvous-usecase'
 
 type Report = {
   id: string
@@ -9,11 +10,15 @@ type Report = {
 }
 
 const getReports = async (): Promise<Report[]> => {
-  const reports = await ReportUsecase({
+  const result = await ReportQueryUsecase({
     reportPort: ReportGateway()
-  }).fetchRecentReports()
+  }).findReports()
 
-  return reports.map((report) => {
+  if (!result.data) {
+    return []
+  }
+
+  return result.data.map((report: ReportDomain) => {
     return {
       id: report.id,
       title: report.meta.title,
@@ -30,7 +35,7 @@ export default async function ReportsPage() {
         <h1 className="text-3xl font-bold">Recent Reports</h1>
       </header>
       <div className="grid grid-cols-4 gap-3">
-        {reports.map((report) => (
+        {reports.map((report: Report) => (
           <ReportCard report={report} key={report.id} />
         ))}
       </div>

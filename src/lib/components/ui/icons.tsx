@@ -5,20 +5,32 @@ import {
   Trash,
   Plus,
   FileWarning,
-  LucideIcon
+  LucideIcon,
+  Settings,
+  Wrench,
+  Receipt,
+  ActivitySquare
 } from 'lucide-react'
 
 type IconProps = React.HTMLAttributes<SVGElement>
 
 export type Icon = LucideIcon
 
-export const Icons = {
+interface IconObject {
+  [key: string]: LucideIcon | ((props: IconProps) => JSX.Element)
+}
+
+export const Icons: IconObject = {
   close: X,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
   trash: Trash,
   add: Plus,
   fileWarning: FileWarning,
+  settings: Settings,
+  wrench: Wrench,
+  receipt: Receipt,
+  activity: ActivitySquare,
   logo: (props: IconProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" {...props}>
       <rect width="256" height="256" fill="none" />

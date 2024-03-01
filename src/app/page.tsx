@@ -1,17 +1,27 @@
 import { Footer } from '@/lib/components/footer'
-import { Header } from '@/lib/components/header'
+import { MainNavigation } from '@/lib/components/mainNavigation'
+import { SignInButton } from '@/lib/components/signInButton'
+import { siteConfig } from '@/lib/config/siteConfig'
 import { getCurrentUser } from '@/lib/utils/session'
 import Image from 'next/image'
+import { redirect } from 'next/navigation'
 
 export default async function Home() {
   const user = await getCurrentUser()
 
+  if (user) {
+    redirect('/dashboard')
+  }
+
   return (
     <div className="flex min-h-screen flex-col space-y-6">
-      <Header
-        user={user}
-        className="sticky top-0 z-40 bg-background border-b"
-      />
+      <header className="sticky top-0 z-40 bg-background border-b">
+        <div className="container flex h-16 items-center justify-between py-4">
+          <MainNavigation items={siteConfig.mainNaviItems} />
+          <SignInButton />
+        </div>
+      </header>
+
       <main className="flex flex-col items-center justify-between py-12 h-dvh">
         <div>
           <Image

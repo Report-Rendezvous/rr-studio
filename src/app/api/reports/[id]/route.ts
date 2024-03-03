@@ -8,26 +8,21 @@ type ReportJson = {
   }
 }
 
-const handler = async (
+const getReportHandler = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  if (params.id === '1' || params.id === '2') {
+  if (params.id === '1') {
     return NextResponse.json({
       id: params.id,
       meta: {
-        title: `Report ${params.id}`,
-        thumbnail: 'thumbnail'
+        title: `TITLE ${params.id}`,
+        thumbnail: 'さむね'
       }
     })
   }
 
-  return new NextResponse(JSON.stringify({ error: 'Not Found' }), {
-    status: 404,
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+  return NextResponse.json({ error: 'Report Not Found' }, { status: 404 })
 }
 
-export { handler as GET }
+export { getReportHandler as GET }

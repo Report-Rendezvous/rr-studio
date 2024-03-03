@@ -1,11 +1,13 @@
 import { Result } from '../types'
 import { Report, ReportRepository, Reports } from 'report-rendezvous-domain'
 
-type ReportPortOps = {
-  reportPort: ReportRepository
+type ReportQueryUsecaseOption = {
+  reportRepository: ReportRepository
 }
 
-export function ReportQueryUsecase({ reportPort }: ReportPortOps) {
+export function ReportQueryUsecase({
+  reportRepository: reportPort
+}: ReportQueryUsecaseOption) {
   return {
     findReportById: async (id: string): Promise<Result<Report>> => {
       const report = await reportPort.findReportById(id)

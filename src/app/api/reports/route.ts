@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const handler = async (req: NextRequest) => {
-  const limit = req.nextUrl.searchParams.get('limit')
   const response = [
     {
       id: '1',

@@ -6,8 +6,9 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
@@ -21,7 +22,8 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./src/*"]
     },
     "types": ["vitest/globals"]
   },

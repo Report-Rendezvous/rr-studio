@@ -1,6 +1,7 @@
-import { ReportGateway } from '@/lib/gateway/reportGateway'
+import { ReportGateway } from 'report-rendezvous-gateway'
 import { ReportQueryUsecase } from 'report-rendezvous-usecase'
 import { notFound } from 'next/navigation'
+import { ReportDriver } from '@/lib/api/reportDriver'
 
 type Report = {
   id: string
@@ -10,7 +11,7 @@ type Report = {
 
 const getReportArticle = async (id: string): Promise<Report | null> => {
   const result = await ReportQueryUsecase({
-    reportPort: ReportGateway()
+    reportPort: ReportGateway({ driver: ReportDriver() })
   }).findReportById(id)
 
   if (result.data) {
@@ -26,9 +27,9 @@ const getReportArticle = async (id: string): Promise<Report | null> => {
 }
 
 const ReportArticlePage = async ({ params }: { params: { id: string } }) => {
-  const reportArticle = await getReportArticle(params.id)
+  const report = await getReportArticle(params.id)
 
-  if (!reportArticle) {
+  if (!report) {
     notFound()
   }
 
@@ -36,11 +37,12 @@ const ReportArticlePage = async ({ params }: { params: { id: string } }) => {
     <>
       <div className="text-[50px]">{params.id}&apos;s Report Page</div>
       <article>
-        {reportArticle.id}
-        {reportArticle.title}
+        {report.id}
+        {report.title}
       </article>
     </>
   )
 }
 
+export const dynamic = 'force-dynamic'
 export default ReportArticlePage

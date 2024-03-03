@@ -1,5 +1,3 @@
-import { ReportJson, ReportJsons } from '@/lib/driver/json'
-import { SelfApiDriver } from '@/lib/driver/selfApiDriver'
 import {
   Report,
   Reports,
@@ -7,10 +5,25 @@ import {
   ReportId
 } from 'report-rendezvous-domain'
 
-export function ReportGateway(): ReportRepository {
+export type ReportJsons = ReportJson[]
+export type ReportJson = {
+  id: string
+  title: string
+}
+
+interface ReportDriver {
+  findReportById(id: string): Promise<ReportJson | null>
+  findReports: () => Promise<ReportJsons>
+}
+
+type GatewayOptions = {
+  driver: ReportDriver
+}
+
+export function ReportGateway({ driver }: GatewayOptions): ReportRepository {
   return {
     findReportById: async (id: ReportId): Promise<Report | null> => {
-      const report = await SelfApiDriver.findReportById(id)
+      const report = await driver.findReportById(id)
       if (!report) {
         return null
       }
@@ -23,9 +36,7 @@ export function ReportGateway(): ReportRepository {
       }
     },
     findReports: async (): Promise<Reports> => {
-      const reports: ReportJsons = await SelfApiDriver.findReports({
-        limit: 30
-      })
+      const reports: ReportJsons = await driver.findReports()
       return reports.map((r: ReportJson) => {
         return {
           id: r.id,

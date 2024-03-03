@@ -1,29 +1,38 @@
-import { AccountName, AccountRepository } from 'report-rendezvous-domain'
+import {
+  Account,
+  AccountId,
+  AccountName,
+  AccountRepository
+} from 'report-rendezvous-domain'
+import { DuplicateAccountError, Result } from '../types'
 
 type AccountUsecaseOption = {
   accountRepository: AccountRepository
 }
 
-export class DuplicateAccountError extends Error {
-  constructor(readonly duplicatedAccountId: string) {
-    super(
-      `Duplicate Account error: AccountID '${duplicatedAccountId}' already exists.`
-    )
-  }
-}
-
 export function AccountUsecase({ accountRepository }: AccountUsecaseOption) {
   return {
-    async createAccount(id: string, name: string, email: string) {
+    async createAccount(
+      id: string,
+      name: string,
+      email: string
+    ): Promise<Result<AccountId>> {
       const account = await accountRepository.findById(id)
       if (account) {
-        throw new DuplicateAccountError(id)
+        return {
+          data: null,
+          error: new DuplicateAccountError(id)
+        }
       }
-      return await accountRepository.save({
+      const accountId = await accountRepository.save({
         id: id,
         name: new AccountName(name),
         email: email
       })
+
+      return accountId
+        ? { data: accountId, error: null }
+        : { data: null, error: new Error('account save error') }
     }
   }
 }

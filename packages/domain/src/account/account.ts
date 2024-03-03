@@ -20,4 +20,6 @@ export class AccountName {
 export interface AccountRepository {
   save: (account: Account) => Promise<AccountId | null>
   findById: (accountId: AccountId) => Promise<Account | null>
+  findByEmail: (email: string) => Promise<Account | null>
+  findByName: (name: AccountName) => Promise<Account | null>
 }

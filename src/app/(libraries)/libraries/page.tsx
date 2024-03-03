@@ -1,7 +1,8 @@
 import { ReportCard } from '@/lib/components/reportCard'
-import { ReportGateway } from '@/lib/gateway/reportGateway'
+import { ReportGateway } from 'report-rendezvous-gateway'
 import { Report as ReportDomain } from 'report-rendezvous-domain'
 import { ReportQueryUsecase } from 'report-rendezvous-usecase'
+import { ReportDriver } from '@/lib/api/reportDriver'
 
 type Report = {
   id: string
@@ -11,7 +12,7 @@ type Report = {
 
 const getReports = async (): Promise<Report[]> => {
   const result = await ReportQueryUsecase({
-    reportPort: ReportGateway()
+    reportPort: ReportGateway({ driver: ReportDriver() })
   }).findReports()
 
   if (!result.data) {

@@ -4,13 +4,8 @@ export type User = {
   id: UserId
 }
 
-export type UserProfile = {
-  id: UserId
-  name: string
-}
-
 export class UserName {
-  constructor(private readonly value: string) {}
+  constructor(private readonly nameValue: string) {}
 
   static of(name: string): UserName {
     if (name.length === 0) {
@@ -21,8 +16,18 @@ export class UserName {
     }
     return new UserName(name)
   }
+
+  value(): string {
+    return this.nameValue
+  }
+}
+
+export type UserProfile = {
+  name: UserName
+  email: string
 }
 
 export interface UserRepository {
-  fetchUserProfileById(id: UserId): Promise<UserProfile | null>
+  fetchProfileById(id: UserId): Promise<UserProfile | null>
+  fetchProfileByName(userName: UserName): Promise<UserProfile | null>
 }

@@ -1,13 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { getUserHandler } from './_getUser'
+import { postUserHandler } from './_postUser'
 
-const hander = async (
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) => {
-  return NextResponse.json({
-    id: '1',
-    name: 'John Doe'
-  })
-}
-
-export { hander as GET }
+export { getUserHandler as GET }
+export { postUserHandler as POST }

@@ -6,11 +6,11 @@ type ReportQueryUsecaseOption = {
 }
 
 export function ReportQueryUsecase({
-  reportRepository: reportPort
+  reportRepository
 }: ReportQueryUsecaseOption) {
   return {
     findReportById: async (id: string): Promise<Result<Report>> => {
-      const report = await reportPort.findReportById(id)
+      const report = await reportRepository.findReportById(id)
 
       if (!report) {
         return {
@@ -25,7 +25,7 @@ export function ReportQueryUsecase({
       }
     },
     findReports: async (): Promise<Result<Reports>> => {
-      const reports = await reportPort.findReports()
+      const reports = await reportRepository.findReports()
 
       return {
         data: reports,

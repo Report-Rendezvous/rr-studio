@@ -12,7 +12,7 @@ type Report = {
 
 const getReports = async (): Promise<Report[]> => {
   const result = await ReportQueryUsecase({
-    reportPort: ReportGateway({ driver: ReportDriver() })
+    reportRepository: ReportGateway({ driver: ReportDriver() })
   }).findReports()
 
   if (!result.data) {

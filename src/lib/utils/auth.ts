@@ -3,7 +3,7 @@ import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
   },
   pages: {
     signIn: '/login',
@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
     },
     async redirect(params) {
       if (params.url === '/api/auth/signin') {
-        return Promise.resolve('/login')
+        return '/login'
       }
       return params.baseUrl
     },

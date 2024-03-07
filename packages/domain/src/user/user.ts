@@ -28,6 +28,5 @@ export type UserProfile = {
 }
 
 export interface UserRepository {
-  fetchProfileById(id: UserId): Promise<UserProfile | null>
   fetchProfileByName(userName: UserName): Promise<UserProfile | null>
 }

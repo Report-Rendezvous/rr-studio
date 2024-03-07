@@ -11,7 +11,6 @@ type UserProfileJson = {
 }
 
 interface UserDriver {
-  fetchProfileById: (userId: string) => Promise<UserProfileJson | null>
   fetchProfileByName: (userName: string) => Promise<UserProfileJson | null>
 }
 
@@ -21,18 +20,6 @@ type GatewayOptions = {
 
 export function UserGateway({ driver }: GatewayOptions): UserRepository {
   return {
-    fetchProfileById: async (userId: UserId): Promise<UserProfile | null> => {
-      const user = await driver.fetchProfileById(userId)
-
-      if (!user) {
-        return null
-      }
-
-      return {
-        name: new UserName(user.name),
-        email: user.email
-      } as UserProfile
-    },
     fetchProfileByName: async (
       userName: UserName
     ): Promise<UserProfile | null> => {

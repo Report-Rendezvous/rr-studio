@@ -1,5 +1,3 @@
-const apiHost = process.env.SELF_API_URL
-
 export type ProfileJson = { name: string; email: string }
 
 export function UserDriver() {
@@ -7,9 +5,12 @@ export function UserDriver() {
     fetchProfileByName: async (
       userName: string
     ): Promise<ProfileJson | null> => {
-      const response = await fetch(`${apiHost}/api/accounts/${userName}`, {
-        cache: 'no-cache'
-      })
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/accounts/${userName}`,
+        {
+          cache: 'no-cache'
+        }
+      )
 
       if (!response.ok) {
         return null

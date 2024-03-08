@@ -9,3 +9,12 @@ export const account_profiles = pgTable('account_profiles', {
   name: text('name').notNull(),
   email: text('email').notNull().unique()
 })
+
+export const articles = pgTable('articles', {
+  id: text('id').primaryKey()
+})
+
+export const user_articles = pgTable('user_articles', {
+  article_id: text('article_id').primaryKey(),
+  user_id: uuid('user_id').primaryKey()
+})

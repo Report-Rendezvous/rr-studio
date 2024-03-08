@@ -1,10 +1,4 @@
-import { Icons } from '@/lib/components/ui/icons'
-import {
-  MainNaviItems,
-  SideNavItem,
-  SideNavItems,
-  SiteConfig
-} from '@/lib/types'
+import { MainNaviItems, SideNavItems, SiteConfig } from '@/lib/types'
 
 export const siteConfig: SiteConfig = {
   mainNaviItems: [
@@ -24,23 +18,28 @@ export const siteConfig: SiteConfig = {
       icon: 'chevronRight'
     },
     {
+      title: 'Articles',
+      href: '/dashboard/articles',
+      icon: 'fileText'
+    },
+    {
       title: 'Activity',
       href: '/dashboard/activity',
-      icon: 'activity' as keyof typeof Icons
+      icon: 'activity'
     }
-  ] as SideNavItems,
+  ],
   sideNavItems: (userName: string): SideNavItems => {
     return [
       {
         title: 'Settings',
         href: `/${userName}/settings`,
-        icon: 'settings' as keyof typeof Icons
-      } as SideNavItem,
+        icon: 'settings'
+      },
       {
         title: 'Billing',
         href: `/${userName}/billing`,
-        icon: 'receipt' as keyof typeof Icons
-      } as SideNavItem
+        icon: 'receipt'
+      }
     ]
   },
   footerNaviAboutItems: [

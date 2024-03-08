@@ -9,7 +9,10 @@ import {
   Settings,
   Wrench,
   Receipt,
-  ActivitySquare
+  ActivitySquare,
+  FileText,
+  FilePlus2,
+  Search
 } from 'lucide-react'
 
 type IconProps = React.HTMLAttributes<SVGElement>
@@ -31,6 +34,9 @@ export const Icons: IconObject = {
   wrench: Wrench,
   receipt: Receipt,
   activity: ActivitySquare,
+  fileText: FileText,
+  filePlus: FilePlus2,
+  search: Search,
   logo: (props: IconProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" {...props}>
       <rect width="256" height="256" fill="none" />

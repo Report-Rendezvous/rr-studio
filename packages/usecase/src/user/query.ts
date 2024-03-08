@@ -1,37 +1,20 @@
-import {
-  AccountName,
-  AccountRepository,
-  UserName,
-  UserProfile,
-  UserRepository
-} from 'report-rendezvous-domain'
+import { UserName, UserProfile, UserRepository } from 'report-rendezvous-domain'
 import { Result, UserNotFoundError } from '../types'
 
 export type UserUsecaseOptions = {
   userRepository: UserRepository
-  accountRepository: AccountRepository
 }
 
-export function UserQuery({
-  userRepository,
-  accountRepository
-}: UserUsecaseOptions) {
+export function UserProfileUsecase({ userRepository }: UserUsecaseOptions) {
   return {
-    async fetchUserProfileBy(
-      accountName: AccountName
+    async fetchUserProfileByName(
+      userName: UserName
     ): Promise<Result<UserProfile>> {
-      const account = await accountRepository.findByName(accountName)
+      const user = await userRepository.fetchProfileByName(userName)
 
-      if (!account) {
-        return {
-          data: null,
-          error: new UserNotFoundError('Account not found')
-        }
-      }
-
-      const user = await userRepository.fetchProfileById(account.id)
-
-      throw new Error('Not implemented')
+      return user
+        ? { data: user, error: null }
+        : { data: null, error: new UserNotFoundError(userName.value()) }
     }
   }
 }

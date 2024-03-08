@@ -1,4 +1,5 @@
 import { markdownConvertProcessor } from '@/lib/components/markdownConvert'
+import { Suspense } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 

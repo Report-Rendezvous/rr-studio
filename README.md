@@ -25,7 +25,6 @@ cp .env.example .env.production
 ## Require settings
 
 - Google OAuth Provider
-- PlanetScale
 
 ## Testing
 

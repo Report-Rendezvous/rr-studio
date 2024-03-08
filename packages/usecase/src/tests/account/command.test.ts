@@ -1,5 +1,5 @@
 import { DuplicateAccountError } from '~/types'
-import { AccountUsecase } from '../account'
+import { AccountUsecase } from '../../account'
 import { AccountRepository } from 'report-rendezvous-domain'
 
 describe('AccountCommandUsecase', () => {

@@ -1,1 +1,1 @@
-export * from './reportQueryUsecase'
+export * from './query'

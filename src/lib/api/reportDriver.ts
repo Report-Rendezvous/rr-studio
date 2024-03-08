@@ -1,11 +1,12 @@
 import { ReportJson } from './types'
 
-const apiHost = process.env.SELF_API_URL
-
 const findReportById = async (id: string): Promise<ReportJson | null> => {
-  const response = await fetch(`${apiHost}/api/reports/${id}`, {
-    cache: 'no-store'
-  })
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/reports/${id}`,
+    {
+      cache: 'no-store'
+    }
+  )
   if (!response.ok) {
     return null
   }
@@ -13,9 +14,12 @@ const findReportById = async (id: string): Promise<ReportJson | null> => {
 }
 
 const findReports = async (): Promise<ReportJson[]> => {
-  const response = await fetch(`${apiHost}/api/reports`, {
-    cache: 'no-store'
-  })
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/reports`,
+    {
+      cache: 'no-store'
+    }
+  )
   if (!response.ok) {
     return [] as ReportJson[]
   }

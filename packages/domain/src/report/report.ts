@@ -1,6 +1,3 @@
-import { UserId } from '../user'
-
-export type AuthorId = UserId
 export type ReportId = string
 export type Reports = Report[]
 
@@ -12,10 +9,6 @@ export type Report = {
 export type ReportMeta = {
   title: string
   thumbnail: string
-}
-
-export type Author = {
-  id: AuthorId
 }
 
 export interface ReportRepository {

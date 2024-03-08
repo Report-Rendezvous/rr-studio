@@ -14,3 +14,10 @@ CREATE TABLE account_profiles (
     name TEXT NOT NULL,
     FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
+
+-- articles DDL
+CREATE TABLE articles (
+    id TEXT PRIMARY KEY,
+    author_id UUID NOT NULL,
+    created_at TIMESTAMP NOT NULL
+);

@@ -23,7 +23,7 @@ export function UserGateway({ driver }: GatewayOptions): UserRepository {
     fetchProfileByName: async (
       userName: UserName
     ): Promise<UserProfile | null> => {
-      const user = await driver.fetchProfileByName(userName.value())
+      const user = await driver.fetchProfileByName(userName.value)
 
       if (!user) {
         return null

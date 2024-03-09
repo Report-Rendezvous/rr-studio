@@ -1,5 +1,4 @@
 import { RichEditor } from '@/lib/components/richEditor'
-import { siteConfig } from '@/lib/config/siteConfig'
 import { getCurrentUser } from '@/lib/utils/session'
 import { redirect } from 'next/navigation'
 

@@ -14,7 +14,7 @@ export function UserProfileUsecase({ userRepository }: UserUsecaseOptions) {
 
       return user
         ? { data: user, error: null }
-        : { data: null, error: new UserNotFoundError(userName.value()) }
+        : { data: null, error: new UserNotFoundError(userName.value) }
     }
   }
 }

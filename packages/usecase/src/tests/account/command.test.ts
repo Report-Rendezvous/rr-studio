@@ -1,10 +1,11 @@
 import { DuplicateAccountError } from '~/types'
-import { AccountUsecase } from '../../account'
+import { AccountCreateUsecase } from '../../account'
 import { AccountRepository } from 'report-rendezvous-domain'
 
 describe('AccountCommandUsecase', () => {
   const accountRepositoryMock: AccountRepository = {
     save: vi.fn(),
+    updateName: vi.fn(),
     findById: vi.fn(),
     findByEmail: vi.fn(),
     findByName: vi.fn()
@@ -17,7 +18,9 @@ describe('AccountCommandUsecase', () => {
     accountRepositoryMock.save = mocked
     accountRepositoryMock.findById = findMocked
 
-    const target = AccountUsecase({ accountRepository: accountRepositoryMock })
+    const target = AccountCreateUsecase({
+      accountRepository: accountRepositoryMock
+    })
     const result = await target.createAccount('id', 'name', 'email')
     expect(result).toEqual({
       data: 'id',
@@ -33,7 +36,7 @@ describe('AccountCommandUsecase', () => {
     accountRepositoryMock.save = mocked
     accountRepositoryMock.findById = foundMocked
 
-    const result = await AccountUsecase({
+    const result = await AccountCreateUsecase({
       accountRepository: accountRepositoryMock
     }).createAccount('id', 'name', 'email')
 

@@ -1,13 +1,14 @@
 import {
   Account,
+  AccountEmail,
   AccountId,
   AccountName,
-  AccountRepository,
-  UserId
+  AccountRepository
 } from 'report-rendezvous-domain'
 
 interface AccountDriver {
-  save: (id: string) => Promise<string>
+  updateName: (id: string, name: string) => Promise<string>
+  findByEmail: (email: string) => Promise<any | null>
 }
 
 type GatewayOptions = {
@@ -19,11 +20,30 @@ export function AccountGateway({ driver }: GatewayOptions): AccountRepository {
     save: async (account: Account): Promise<AccountId | null> => {
       throw new Error('not implemented')
     },
+    updateName: async (
+      accountId: AccountId,
+      name: AccountName
+    ): Promise<AccountName> => {
+      try {
+        const result = await driver.updateName(accountId, name.value)
+        return AccountName.of(result)
+      } catch (error) {
+        throw new Error('update name error')
+      }
+    },
     findById: async (accountId: AccountId): Promise<Account | null> => {
       throw new Error('not implemented')
     },
-    findByEmail: async (email: string): Promise<Account | null> => {
-      throw new Error('not implemented')
+    findByEmail: async (email: AccountEmail): Promise<Account | null> => {
+      const account = await driver.findByEmail(email.value)
+      if (!account) {
+        return null
+      }
+      return {
+        id: account.id,
+        email: AccountEmail.of(account.email),
+        name: AccountName.of(account.name)
+      }
     },
     findByName: async (name: AccountName): Promise<Account | null> => {
       throw new Error('not implemented')

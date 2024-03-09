@@ -4,7 +4,6 @@ import { UserNotFoundError } from '../types'
 
 describe('UserQueryUsecase', () => {
   const repositoryMock: UserRepository = {
-    fetchProfileById: vi.fn(),
     fetchProfileByName: vi.fn()
   }
 

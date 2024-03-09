@@ -1,5 +1,11 @@
 export type Result<T> = { data: T; error: null } | { data: null; error: Error }
 
+export class AccountUpdateFailedError extends Error {
+  constructor(readonly value: string) {
+    super(`Account update failed: ${value}`)
+  }
+}
+
 export class AccountNotFoundError extends Error {
   constructor(readonly value: string) {
     super(`Account not found: ${value}`)

@@ -5,20 +5,16 @@ export type User = {
 }
 
 export class UserName {
-  constructor(private readonly nameValue: string) {}
+  constructor(readonly value: string) {}
 
   static of(name: string): UserName {
     if (name.length === 0) {
       throw new Error('Required name')
     }
-    if (name.length <= 32) {
+    if (name.length >= 32) {
       throw new Error('Must be 32 characters or fewer')
     }
     return new UserName(name)
-  }
-
-  value(): string {
-    return this.nameValue
   }
 }
 

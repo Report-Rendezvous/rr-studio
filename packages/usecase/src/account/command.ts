@@ -1,5 +1,6 @@
 import {
   Account,
+  AccountEmail,
   AccountId,
   AccountName,
   AccountRepository
@@ -10,7 +11,27 @@ type AccountUsecaseOption = {
   accountRepository: AccountRepository
 }
 
-export function AccountUsecase({ accountRepository }: AccountUsecaseOption) {
+export function AccountUpdateUsecase({
+  accountRepository
+}: AccountUsecaseOption) {
+  return {
+    async updateName(
+      id: AccountId,
+      name: AccountName
+    ): Promise<Result<AccountName>> {
+      try {
+        const updatedName = await accountRepository.updateName(id, name)
+        return { data: updatedName, error: null }
+      } catch (e: any) {
+        return { data: null, error: e }
+      }
+    }
+  }
+}
+
+export function AccountCreateUsecase({
+  accountRepository
+}: AccountUsecaseOption) {
   return {
     async createAccount(
       id: string,
@@ -27,7 +48,7 @@ export function AccountUsecase({ accountRepository }: AccountUsecaseOption) {
       const accountId = await accountRepository.save({
         id: id,
         name: new AccountName(name),
-        email: email
+        email: new AccountEmail(email)
       })
 
       return accountId

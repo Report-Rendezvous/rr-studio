@@ -1,5 +1,5 @@
 'use client'
-import { buttonVariants } from '@/lib/components/ui/button'
+
 import {
   Card,
   CardContent,
@@ -8,61 +8,79 @@ import {
   CardHeader,
   CardTitle
 } from '@/lib/components/ui/card'
-import { Icons } from '@/lib/components/ui/icons'
 import { Input } from '@/lib/components/ui/input'
-import { Label } from '@/lib/components/ui/label'
-import { cn } from '@/lib/utils/utils'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import { useFormState } from 'react-dom'
+import { submitNameAction } from '@/lib/actions'
+import { FormSubmitButton } from '@/lib/components/formSubmitButton'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import { UserProfileUsecase } from 'packages/usecase'
+import { UserName } from 'packages/domain'
+import { UserGateway } from 'packages/gateway'
+import { UserDriver } from '@/lib/api/userDriver'
 
-type User = {
-  id: string
-  name: string
-}
+export const UserNameForm: React.FC<{ userName: string }> = ({ userName }) => {
+  const result = UserProfileUsecase({
+    userRepository: UserGateway({ driver: UserDriver() })
+  }).fetchUserProfileByName(UserName.of(userName))
 
-export const UserNameForm: React.FC<{ user: User }> = ({ user }) => {
-  const router = useRouter()
-  const [isSaving, setIsSaving] = useState<boolean>(false)
-
-  async function onSubmit(data: FormData) {
-    setIsSaving(true)
-    toast('Success Your Operation.', {
-      description: 'Your name has been updated.'
-    })
-    setIsSaving(false)
-    router.refresh()
+  const initialState = {
+    message: null,
+    data: null,
+    errorMessage: null
   }
+  const [state, dispatch] = useFormState(submitNameAction, initialState)
+  const [name, setName] = useState('')
+
+  useEffect(() => {
+    if (state.data) {
+      setName(state.data)
+      toast.success('Profile Updated.')
+    }
+  }, [state])
 
   return (
-    <form>
+    <form action={dispatch}>
       <Card>
         <CardHeader>
-          <CardTitle>Your Name</CardTitle>
+          <CardTitle>Your Display Name</CardTitle>
           <CardDescription>
             Please enter your full name or a display name you are comfortable
             with.
           </CardDescription>
+          <CardDescription>
+            You can change the name displayed on RR-STUDIO, but please note that
+            this name is used for your author profile and cannot be changed for
+            the URL that displays your articles (e.g., &quot;/
+            {'{'}your-id{'}'}/articles/{'{'}article-id
+            {'}'}&quot;).
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="name">
-              Name
-            </Label>
-            <Input id="name" className="w-[400px]" size={32} />
+            <Input
+              id="name"
+              name="name"
+              type="text"
+              className="w-[400px]"
+              value={name}
+              size={32}
+              onChange={(e) => setName(e.target.value)}
+            />
+            {state.errorMessage ? (
+              <p
+                id=":re4:-form-item-message"
+                className="text-[0.8rem] font-medium text-destructive"
+              >
+                {state.errorMessage}
+              </p>
+            ) : null}
           </div>
         </CardContent>
         <CardFooter>
-          <button
-            type="submit"
-            className={cn(buttonVariants())}
-            disabled={isSaving}
-          >
-            {isSaving && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
+          <FormSubmitButton>
             <span>Save</span>
-          </button>
+          </FormSubmitButton>
         </CardFooter>
       </Card>
     </form>

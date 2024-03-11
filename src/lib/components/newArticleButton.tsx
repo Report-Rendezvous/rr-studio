@@ -4,7 +4,7 @@ import { redirect, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Button, ButtonProps } from '@/lib/components/ui/button'
 import { Icons } from '@/lib/components/ui/icons'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { articleCreateAction } from '@/lib/actions/articleCreateAction'
 import { serverActionEmpty } from '@/lib/actions'
 import { useFormState, useFormStatus } from 'react-dom'
@@ -12,9 +12,12 @@ import { useFormState, useFormStatus } from 'react-dom'
 interface NewArticleButtonProps extends ButtonProps {}
 
 export function NewArticleButton({ ...props }: NewArticleButtonProps) {
-  const initialState = {
-    temporaryArticleId: ''
-  }
+  // const initialState = {
+  //   temporaryArticleId: ''
+  // }
+  const initialState = useMemo(() => {
+    return { temporaryArticleId: '' }
+  }, [])
 
   const [state, action] = useFormState(articleCreateAction, initialState)
   const status = useFormStatus()
@@ -24,7 +27,7 @@ export function NewArticleButton({ ...props }: NewArticleButtonProps) {
     redirect(`/editor/${state.temporaryArticleId}`)
     // router.refresh()
     // router.push(`/editor/${state.temporaryArticleId}`)
-  }, [state.temporaryArticleId])
+  }, [initialState, state])
 
   return (
     <form action={serverActionEmpty}>

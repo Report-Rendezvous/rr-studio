@@ -1,20 +1,29 @@
-import { RichEditor } from '@/lib/components/richEditor'
-import { getCurrentUser } from '@/lib/utils/session'
-import { redirect } from 'next/navigation'
+import Editor from '@/lib/components/editor'
 
-export default async function EditorPage() {
-  const user = getCurrentUser()
-
-  if (!user) {
-    redirect('/login')
+type EditorPageProps = {
+  params: {
+    slug: string
   }
+}
+
+export default async function EditorPage({
+  params: { slug }
+}: EditorPageProps) {
+  // find article by url-schema
+  // const article = await getArticleBySlug(slug)
+  // if (!article) {
+  //   notFound()
+  // }
 
   return (
-    <div className="container">
-      <h1>Editor</h1>
-      <div className="w-min-full">
-        <RichEditor />
-      </div>
-    </div>
+    <>
+      {slug}
+      <Editor />
+    </>
   )
+}
+
+async function getArticleBySlug(slug: string) {
+  
+  return null
 }

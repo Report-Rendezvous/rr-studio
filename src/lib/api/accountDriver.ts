@@ -1,6 +1,5 @@
 import { AccountModel } from '@/lib/api/types'
-import { account_profiles, accounts, db } from 'report-rendezvous-driver'
-import { eq } from 'drizzle-orm'
+import { account_profiles, accounts, db, eq } from 'report-rendezvous-driver'
 import {
   AccountNotFoundError,
   AccountUpdateFailedError

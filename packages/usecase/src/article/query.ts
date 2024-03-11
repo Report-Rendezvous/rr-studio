@@ -11,6 +11,17 @@ type QueryDeps = {
   articleRepository: ArticleRepository
 }
 
+type EditingArticle = {
+  id: string
+  title: string
+  content: string
+  status: 'draft' | 'published'
+}
+
+export function editingArticle(): EditingArticle {
+  return {} as EditingArticle
+}
+
 export function usersArticle({
   accountRepository,
   articleRepository

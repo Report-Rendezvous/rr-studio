@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { eq } from 'drizzle-orm'
-import { accounts, account_profiles } from '@/lib/db/schema'
-import { db } from '@/lib/db'
+import { db, accounts, account_profiles } from 'report-rendezvous-driver'
 
 export const getAccountHandler = async (
   req: NextRequest,

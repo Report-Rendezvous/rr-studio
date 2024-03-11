@@ -13,8 +13,15 @@ export type Articles = Article[]
 export type Article = {
   id: ArticleId
   authorId: AuthorId
+  title: string
+  createdAt: string
+}
+
+export type ArticleContent = {
+  content: string
 }
 
 export interface ArticleRepository {
-  save(article: Article): Promise<ArticleId>
+  save(args: { articleId: ArticleId; authorId: AuthorId }): Promise<ArticleId>
+  findByAuthor(authorId: AuthorId): Promise<Articles>
 }

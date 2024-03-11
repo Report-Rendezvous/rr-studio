@@ -8,7 +8,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "report-rendezvous-domain": "*"
+    "report-rendezvous-domain": "*",
+    "report-rendezvous-driver": "*"
   },
   "packageManager": "pnpm@8.0.0",
   "private": true

@@ -16,8 +16,24 @@ CREATE TABLE account_profiles (
 );
 
 -- articles DDL
+-- resource
 CREATE TABLE articles (
-    id TEXT PRIMARY KEY,
+    id TEXT PRIMARY KEY
+);
+
+-- article_overviews
+-- resource
+CREATE TABLE article_overviews (
+    article_id TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    FOREIGN KEY (article_id) REFERENCES articles(id)
+);
+
+-- writings article
+-- events
+CREATE TABLE writings (
+    article_id TEXT PRIMARY KEY,
     author_id UUID NOT NULL,
-    created_at TIMESTAMP NOT NULL
+    created_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (article_id) REFERENCES articles(id)
 );

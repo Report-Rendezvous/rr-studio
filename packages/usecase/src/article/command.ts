@@ -12,7 +12,7 @@ export function ArticleCommand({ articleRepository }: ArticleCmdUsecaseOption) {
   return {
     async createTemporaryArticle(accountId: AccountId): Promise<ArticleId> {
       const articleId = await articleRepository.save({
-        id: ArticleId.gen(),
+        articleId: ArticleId.gen(),
         authorId: accountId
       })
       return articleId

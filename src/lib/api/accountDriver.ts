@@ -1,6 +1,5 @@
 import { AccountModel } from '@/lib/api/types'
-import { db } from '@/lib/db'
-import { account_profiles, accounts } from '@/lib/db/schema'
+import { account_profiles, accounts, db } from 'report-rendezvous-driver'
 import { eq } from 'drizzle-orm'
 import {
   AccountNotFoundError,
@@ -58,8 +57,6 @@ export function AccountDriver() {
       if (!response.ok) {
         return response.json()
       }
-
-      console.log('response', response)
 
       return response.json()
     }

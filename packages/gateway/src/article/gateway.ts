@@ -1,25 +1,47 @@
-import { Article, ArticleId, ArticleRepository } from 'report-rendezvous-domain'
+import {
+  AccountId,
+  Article,
+  ArticleId,
+  ArticleRepository,
+  Articles,
+  AuthorId
+} from 'report-rendezvous-domain'
+import { ArticleReadModel, IArticleDriver } from 'report-rendezvous-driver'
 
-type ArticleModel = {
-  id: string
-  authorId: string
+type Deps = {
+  articleDriver: IArticleDriver
 }
 
-type ArticleDriver = {
-  save: (articleModel: ArticleModel) => Promise<string>
-}
-type Option = {
-  driver: ArticleDriver
-}
-
-export const ArticleGateway = ({ driver }: Option): ArticleRepository => {
+export const ArticleGateway = ({ articleDriver }: Deps): ArticleRepository => {
   return {
-    save: async (article: Article): Promise<ArticleId> => {
-      const result = await driver.save({
-        id: article.id.value,
-        authorId: article.authorId
+    save: async ({
+      articleId,
+      authorId
+    }: {
+      articleId: ArticleId
+      authorId: AuthorId
+    }): Promise<ArticleId> => {
+      const result = await articleDriver.save({
+        id: articleId.value,
+        authorId: authorId
       })
       return new ArticleId(result)
+    },
+    findByAuthor: async (authorId: AccountId): Promise<Articles> => {
+      const results = await articleDriver.findByAuthor(authorId)
+
+      const articles: Article[] = results.map(
+        (result: ArticleReadModel): Article => {
+          return {
+            id: new ArticleId(result.id),
+            authorId: result.authorId,
+            title: result.title,
+            createdAt: result.createdAt
+          }
+        }
+      )
+
+      return articles
     }
   }
 }

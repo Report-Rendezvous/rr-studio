@@ -9,7 +9,7 @@ describe('ArticleCommand', () => {
   const option = {
     articleRepository: {
       save: vi.fn()
-    } as ArticleRepository
+    }
   }
   const target = ArticleCommand(option)
 

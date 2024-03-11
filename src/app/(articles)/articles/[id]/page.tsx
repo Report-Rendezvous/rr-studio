@@ -6,7 +6,6 @@ import { ReportDriver } from '@/lib/api/reportDriver'
 type Report = {
   id: string
   title: string
-  thumbnail: string
 }
 
 const getReportArticle = async (id: string): Promise<Report | null> => {
@@ -17,8 +16,7 @@ const getReportArticle = async (id: string): Promise<Report | null> => {
   if (data) {
     return {
       id: data.id,
-      title: data.meta.title,
-      thumbnail: data.meta.thumbnail
+      title: data.meta.title
     }
   }
 

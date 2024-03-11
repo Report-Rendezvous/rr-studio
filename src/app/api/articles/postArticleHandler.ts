@@ -1,20 +1,44 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-type ArticleModel = {
-  id: string
-  authorId: string
-}
+import {
+  ArticleCommandModel,
+  articles,
+  writings,
+  db
+} from 'report-rendezvous-driver'
 
 export const postArticleHandler = async (
   req: NextRequest,
-  res: NextResponse<ArticleModel>
+  res: NextResponse<ArticleCommandModel>
 ) => {
-  const params: ArticleModel = await req.json()
+  const params: ArticleCommandModel = await req.json()
 
-  console.log('params', params)
+  try {
+    const result = await db.transaction(async (tx) => {
+      const createdId = await tx
+        .insert(articles)
+        .values({
+          id: params.id
+        })
+        .returning()
+        .onConflictDoNothing()
 
-  return NextResponse.json(
-    { message: `POST /users body=${JSON.stringify(params)}` },
-    { status: 201 }
-  )
+      await tx
+        .insert(writings)
+        .values({
+          article_id: params.id,
+          author_id: params.authorId,
+          created_at: new Date().toISOString()
+        })
+        .onConflictDoNothing()
+
+      return createdId[0]
+    })
+
+    return NextResponse.json(
+      { message: `article post id: ${result}` },
+      { status: 201 }
+    )
+  } catch (e) {
+    return NextResponse.json({ message: `error: ${e}` }, { status: 500 })
+  }
 }

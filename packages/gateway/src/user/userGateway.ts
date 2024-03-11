@@ -1,21 +1,8 @@
-import {
-  UserId,
-  UserName,
-  UserProfile,
-  UserRepository
-} from 'report-rendezvous-domain'
-
-type UserProfileJson = {
-  name: string
-  email: string
-}
-
-interface UserDriver {
-  fetchProfileByName: (userName: string) => Promise<UserProfileJson | null>
-}
+import { UserName, UserProfile, UserRepository } from 'report-rendezvous-domain'
+import { IUserDriver } from 'report-rendezvous-driver'
 
 type GatewayOptions = {
-  driver: UserDriver
+  driver: IUserDriver
 }
 
 export function UserGateway({ driver }: GatewayOptions): UserRepository {
@@ -32,7 +19,7 @@ export function UserGateway({ driver }: GatewayOptions): UserRepository {
       return {
         name: new UserName(user.name),
         email: user.email
-      } as UserProfile
+      }
     }
   }
 }

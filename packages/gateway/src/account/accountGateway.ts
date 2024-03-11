@@ -5,14 +5,10 @@ import {
   AccountName,
   AccountRepository
 } from 'report-rendezvous-domain'
-
-interface AccountDriver {
-  updateName: (id: string, name: string) => Promise<string>
-  findByEmail: (email: string) => Promise<any | null>
-}
+import { IAccountDriver } from 'report-rendezvous-driver'
 
 type GatewayOptions = {
-  driver: AccountDriver
+  driver: IAccountDriver
 }
 
 export function AccountGateway({ driver }: GatewayOptions): AccountRepository {

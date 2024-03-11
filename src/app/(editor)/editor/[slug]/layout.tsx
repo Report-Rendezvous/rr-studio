@@ -3,11 +3,11 @@ import { Header } from '@/lib/components/header'
 import { getCurrentUser } from '@/lib/utils/session'
 import { Suspense } from 'react'
 
-interface ContentLayoutProps {
+interface EditorLayoutProps {
   children: React.ReactNode
 }
 
-export default async function ContentLayout({ children }: ContentLayoutProps) {
+export default async function EditorLayout({ children }: EditorLayoutProps) {
   const user = await getCurrentUser()
   return (
     <div className="flex min-h-screen flex-col space-y-6">

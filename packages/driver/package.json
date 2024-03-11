@@ -1,0 +1,16 @@
+{
+  "name": "report-rendezvous-driver",
+  "version": "1.0.0",
+  "description": "report-rendezvous's driver package",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc --build --declaration",
+    "test": "vitest run"
+  },
+  "packageManager": "pnpm@8.0.0",
+  "private": true,
+  "dependencies": {
+    "drizzle-orm": "^0.29.5",
+    "postgres": "^3.4.3"
+  }
+}

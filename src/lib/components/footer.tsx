@@ -1,14 +1,5 @@
 import { siteConfig } from '@/lib/config/siteConfig'
-import { FooterNaviItem } from '@/lib/types'
 import Link from 'next/link'
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  ReactPortal,
-  PromiseLikeOfReactNode
-} from 'react'
-import { UrlObject } from 'url'
 
 export function Footer() {
   return (

@@ -1,25 +1,26 @@
-import { Icons } from './icons'
+import { Icons } from '@/lib/components/ui/icons'
 
 export type SiteConfig = {
+  urls: {
+    login: string
+    dashboard: string
+  }
   mainNaviItems: MainNaviItems
   sideNavItems: (userName: string) => SideNavItems
-  dashboardNavItems: SideNavItems
-  footerNaviAboutItems: FooterNaviItems
-  footerNaviLegalItems: FooterNaviItems
+  dashboardNavItems: (NaviItem & NaviIcon)[]
+  footerNaviAboutItems: NaviItem[]
+  footerNaviLegalItems: NaviItem[]
 }
+
+interface NaviItem {
+  title: string
+  href: string
+}
+interface NaviIcon {
+  icon: keyof Icons
+}
+
 export type MainNaviItems = MainNaviItem[]
-export type MainNaviItem = {
-  title: string
-  href: string
-}
+export type MainNaviItem = NaviItem
 export type SideNavItems = SideNavItem[]
-export type SideNavItem = {
-  title: string
-  href: string
-  icon: string
-}
-export type FooterNaviItems = FooterNaviItem[]
-export type FooterNaviItem = {
-  title: string
-  href: string
-}
+export type SideNavItem = NaviItem & NaviIcon

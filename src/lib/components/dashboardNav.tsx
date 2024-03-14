@@ -16,7 +16,7 @@ export const DashboardNav = ({ items }: DashboardNavProps) => {
   return (
     <nav className={cn('grid items-start gap-2')}>
       {items.map((item: SideNavItem, index: number) => {
-        const Icon = Icons[item.icon]
+        const Icon = Icons[item.icon.toString()]
         return (
           <Link href={item.href} key={index}>
             <span

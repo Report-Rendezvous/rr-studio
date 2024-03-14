@@ -11,14 +11,6 @@ type Article = {
   draft: boolean
 }
 
-type DraftArticle = Article & {
-  draft: true
-}
-
-type PublishedArticle = Article & {
-  draft: false
-}
-
 export const ArticleCard = async ({ article }: ArticleCardProps) => {
   return (
     <article className="flex py-10flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent bg-muted">

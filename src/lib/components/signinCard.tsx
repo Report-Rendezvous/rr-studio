@@ -9,8 +9,13 @@ import {
 } from '@/lib/components/ui/card'
 import { Icons } from '@/lib/components/ui/icons'
 import { signIn } from 'next-auth/react'
+import { useCallback } from 'react'
 
 export function SignInCard() {
+  const signInCallback = useCallback(() => {
+    signIn('google')
+  }, [])
+
   return (
     <Card>
       <CardHeader className="space-y-1">
@@ -21,7 +26,7 @@ export function SignInCard() {
       </CardHeader>
       <CardContent className="grid gap-4">
         <div className="grid grid-cols-1 gap-6">
-          <Button variant="outline" onClick={() => signIn('google')}>
+          <Button variant="outline" onClick={signInCallback}>
             <Icons.google className="mr-2 h-4 w-4" />
             Google
           </Button>

@@ -2,13 +2,14 @@
 
 import { Button } from '@/lib/components/ui/button'
 import { Icons } from '@/lib/components/ui/icons'
+import { FC } from 'react'
 import { useFormStatus } from 'react-dom'
 
 type SubmitButtonProps = {
   children: React.ReactNode
 }
 
-export const FormSubmitButton: React.FC<SubmitButtonProps> = ({ children }) => {
+export const FormSubmitButton: FC<SubmitButtonProps> = ({ children }) => {
   const status = useFormStatus()
 
   return (

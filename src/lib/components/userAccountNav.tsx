@@ -58,8 +58,8 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"
-          onSelect={(event) => {
-            event.preventDefault()
+          onSelect={(e) => {
+            e.preventDefault()
             signOut({
               callbackUrl: `${window.location.origin}/login`
             })

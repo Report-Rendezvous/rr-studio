@@ -19,7 +19,7 @@ export async function Header({ user, className }: HeaderProps) {
       <div className="container flex h-16 items-center justify-between py-4">
         <MainNavigation items={siteConfig.mainNaviItems} />
         {!user ? (
-          <SignInButton />
+          <SignInButton href={siteConfig.urls.login} />
         ) : (
           <UserAccountNav
             user={{

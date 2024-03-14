@@ -1,6 +1,10 @@
 import { MainNaviItems, SideNavItems, SiteConfig } from '@/lib/types'
 
 export const siteConfig: SiteConfig = {
+  urls: {
+    login: '/login',
+    dashboard: '/dashboard'
+  },
   mainNaviItems: [
     {
       title: 'Libraries',
@@ -10,7 +14,7 @@ export const siteConfig: SiteConfig = {
       title: 'Marketplace',
       href: '/marketplace'
     }
-  ] as MainNaviItems,
+  ],
   dashboardNavItems: [
     {
       title: 'Overview',

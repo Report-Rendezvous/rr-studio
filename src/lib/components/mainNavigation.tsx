@@ -2,14 +2,13 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils/utils'
 
-type Item = {
+type NavigationItem = {
   title: string
   href: string
 }
 
 type MainNavigationProps = React.HTMLAttributes<HTMLElement> & {
-  className?: string
-  items?: Item[]
+  items?: NavigationItem[]
 }
 
 export function MainNavigation(props: MainNavigationProps) {

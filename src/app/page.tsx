@@ -18,7 +18,7 @@ export default async function Home() {
       <header className="sticky top-0 z-40 bg-background border-b">
         <div className="container flex h-16 items-center justify-between py-4">
           <MainNavigation items={siteConfig.mainNaviItems} />
-          <SignInButton />
+          <SignInButton href={siteConfig.urls.login} />
         </div>
       </header>
 

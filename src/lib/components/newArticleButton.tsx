@@ -12,12 +12,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 interface NewArticleButtonProps extends ButtonProps {}
 
 export function NewArticleButton({ ...props }: NewArticleButtonProps) {
-  // const initialState = {
-  //   temporaryArticleId: ''
-  // }
-  const initialState = useMemo(() => {
-    return { temporaryArticleId: '' }
-  }, [])
+  const initialState = { temporaryArticleId: '' }
 
   const [state, action] = useFormState(articleCreateAction, initialState)
   const status = useFormStatus()
@@ -25,8 +20,6 @@ export function NewArticleButton({ ...props }: NewArticleButtonProps) {
   useEffect(() => {
     if (state == initialState) return
     redirect(`/editor/${state.temporaryArticleId}`)
-    // router.refresh()
-    // router.push(`/editor/${state.temporaryArticleId}`)
   }, [initialState, state])
 
   return (

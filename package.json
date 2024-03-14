@@ -19,7 +19,9 @@
     "secretlint": "secretlint --maskSecrets --secretlintignore .gitignore '**/*'",
     "usecase": "pnpm -F ./packages/usecase",
     "domain": "pnpm -F ./packages/domain",
-    "gateway": "pnpm -F ./packages/gateway"
+    "gateway": "pnpm -F ./packages/gateway",
+    "db:up": "docker-compose -f ./environment/db/postgresql/docker-compose.yml up -d",
+    "db:down": "docker-compose -f ./environment/db/postgresql/docker-compose.yml down --volumes"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",

@@ -1,4 +1,4 @@
-import { MainNaviItems, SideNavItems, SiteConfig } from '@/lib/types'
+import { SideNavItems, SiteConfig } from '@/lib/types'
 
 export const siteConfig: SiteConfig = {
   urls: {

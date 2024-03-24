@@ -1,13 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-type ReportJson = {
-  id: string
-  meta: {
-    title: string
-    thumbnail: string
-  }
-}
-
 const getReportHandler = async (
   req: NextRequest,
   { params }: { params: { id: string } }

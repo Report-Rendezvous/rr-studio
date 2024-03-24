@@ -24,6 +24,5 @@ export default async function EditorPage({
 }
 
 async function getArticleBySlug(slug: string) {
-  
   return null
 }

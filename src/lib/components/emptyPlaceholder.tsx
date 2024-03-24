@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils/utils'
-import { Icons } from '@/lib/components/ui/icons'
 
 interface EmptyPlaceholderProps extends React.HTMLAttributes<HTMLDivElement> {}
 

@@ -1,12 +1,12 @@
 import { Icons } from '@/lib/components/ui/icons'
 
-export type SiteConfig = {
+export interface SiteConfig {
   urls: {
     login: string
     dashboard: string
   }
   mainNaviItems: MainNaviItems
-  sideNavItems: (userName: string) => SideNavItems
+  sideNavItems: (string) => SideNavItems
   dashboardNavItems: (NaviItem & NaviIcon)[]
   footerNaviAboutItems: NaviItem[]
   footerNaviLegalItems: NaviItem[]

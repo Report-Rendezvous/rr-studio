@@ -1,13 +1,8 @@
 import { markdownConvertProcessor } from '@/lib/components/markdownConvert'
+import { markdownFileUrls } from '@/lib/config/mdfiles'
+import { fetchFileContent } from '@/lib/utils/fetchFileContent'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-
-async function getInactivityPolicyContent() {
-  const response = await fetch(
-    'https://raw.githubusercontent.com/Report-Rendezvous/rr-docs/main/legal/inactivity-policy.md'
-  )
-  return response.text()
-}
 
 export default async function InactivityPolicyPage() {
   return (
@@ -16,7 +11,7 @@ export default async function InactivityPolicyPage() {
         remarkPlugins={[remarkGfm]}
         components={markdownConvertProcessor}
       >
-        {await getInactivityPolicyContent()}
+        {await fetchFileContent(markdownFileUrls.inactivityPolicy)}
       </ReactMarkdown>
     </article>
   )

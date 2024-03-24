@@ -6,11 +6,7 @@ import { cn } from '@/lib/utils/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-type AccountSettingNavProps = {
-  items: SideNavItems
-}
-
-export const AccountSettingNav = ({ items }: AccountSettingNavProps) => {
+export const AccountSettingNav = ({ items }: { items: SideNavItems }) => {
   const path = usePathname()
 
   return (

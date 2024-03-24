@@ -1,6 +1,6 @@
 'use client'
 
-import { redirect, useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Button, ButtonProps } from '@/lib/components/ui/button'
 import { Icons } from '@/lib/components/ui/icons'
@@ -12,7 +12,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 interface NewArticleButtonProps extends ButtonProps {}
 
 export function NewArticleButton({ ...props }: NewArticleButtonProps) {
-  const initialState = { temporaryArticleId: '' }
+  const initialState = useMemo(() => ({ temporaryArticleId: '' }), [])
 
   const [state, action] = useFormState(articleCreateAction, initialState)
   const status = useFormStatus()

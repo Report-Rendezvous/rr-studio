@@ -9,18 +9,18 @@ type Report = {
 }
 
 const getReportArticle = async (id: string): Promise<Report | null> => {
-  const { data, error } = await ReportQueryUsecase({
+  const { data } = await ReportQueryUsecase({
     reportRepository: ReportGateway({ driver: ReportDriver() })
   }).findReportById(id)
 
-  if (data) {
-    return {
-      id: data.id,
-      title: data.meta.title
-    }
+  if (!data) {
+    return null
   }
 
-  return null
+  return {
+    id: data.id,
+    title: data.meta.title
+  }
 }
 
 const ReportArticlePage = async ({ params }: { params: { id: string } }) => {

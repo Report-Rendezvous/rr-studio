@@ -1,14 +1,8 @@
 import { markdownConvertProcessor } from '@/lib/components/markdownConvert'
-import { Suspense } from 'react'
+import { markdownFileUrls } from '@/lib/config/mdfiles'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-
-async function getTermsContent() {
-  const response = await fetch(
-    'https://raw.githubusercontent.com/Report-Rendezvous/rr-docs/main/legal/terms.md'
-  )
-  return response.text()
-}
+import { fetchFileContent } from '@/lib/utils/fetchFileContent'
 
 export default async function TermsPage() {
   return (
@@ -17,7 +11,7 @@ export default async function TermsPage() {
         remarkPlugins={[remarkGfm]}
         components={markdownConvertProcessor}
       >
-        {await getTermsContent()}
+        {await fetchFileContent(markdownFileUrls.temrs)}
       </ReactMarkdown>
     </article>
   )

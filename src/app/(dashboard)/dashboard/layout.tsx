@@ -35,7 +35,7 @@ export default async function DashboardLayout({
 
       <div className="container flex flex-1 items-start gap-2">
         <aside className="sticky w-[200px] py-2" style={{ top: '65px' }}>
-          <DashboardNav items={siteConfig.dashboardNavItems} className="" />
+          <DashboardNav items={siteConfig.dashboardNavItems} />
         </aside>
         <main className="container py-2 border rounded-md">
           {children}
